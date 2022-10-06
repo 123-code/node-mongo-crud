@@ -2,7 +2,7 @@ const express = require("express");
 //import { updateExportDeclaration } from 'typescript';
 const ciudadesSchema = require("../Models/ciudadesSchema");
 const paisesSchema = require("../Models/paisesSchema");
-
+//crud
  const router = express.Router();
 //r
 router.get("/getciudades",async (req,res)=>{
@@ -28,8 +28,11 @@ router.post("/postciudades",(req,res)=>{
             console.error(err);
         }
         else{
+            //
+            res.send(data);
             res.status(200);
-            console.log("Datos guardados")
+            console.log("Datos guardados");
+           // process.exit(0);
         }
     })
 
@@ -51,7 +54,7 @@ console.error(err);
 
 });
 //u
-router.patch("/updateciudades",async(req,res)=>{
+router.patch("/updateciudades/:id",async(req,res)=>{
     try{
         const id = req.params.id;
         const updated = req.body;
