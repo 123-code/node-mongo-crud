@@ -2,7 +2,7 @@ import {React,useState,useEffect} from 'react';
 import axios from "axios";
 
 const client = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/paises" 
+    baseURL: "https://localhost:3500/api" 
   });
 
 const Main = ()=>{
@@ -38,7 +38,7 @@ const Main = ()=>{
 
 
     const updateciudad = async()=>{
-        await client.put("",{
+        await client.patch("",{
             nombre:ciudad.nombre,
             poblacion:ciudad.poblacion 
         })
@@ -81,7 +81,7 @@ const Main = ()=>{
                     pais.codigoA = response.codigoA)
             }
 fetchpais();
-        },[])
+        },[pais])
     
 
         const deletepais = async(id)=>{
@@ -117,7 +117,7 @@ fetchpais();
             <h1> Ingresar País </h1>
 
             <h2>Nombre</h2>
-            <input type="text" id="paisid" onChange={(event)=>setpais.Nombre(event.target.value)}></input>
+            <input type="text" id="paisid" onChange={(event)=>setpais(event.target.value)}></input>
 
             <h2>Poblacion</h2>
             <input type="text" onChange={(event)=>setpais.Poblacion(event.target.value)}></input>
@@ -130,7 +130,15 @@ fetchpais();
 
             <h2>codigo Alfanumerico</h2>
             <input type="text" onChange={(event)=>setpais.codigoA(event.target.value)}></input>
+<div>
+    <h1>  Ingresar Ciudad  </h1>
+<h2> Nombre De la ciudad </h2>
+    <input type="text" id="paisid" onChange={(event)=>setciudad(event.target.value)}></input>
 
+            <h2>Poblacion</h2>
+            <input type="text" onChange={(event)=>setciudad.Poblacion(event.target.value)}></input>
+
+</div>
             <button onClick={postpais}>Agregar Pais</button>
             <button onClick={deletepais(pais)}> Eliminar pais </button>
             <button onClick={postciudad}>Agregar Ciudad </button>
